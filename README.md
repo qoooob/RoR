@@ -1,1 +1,1 @@
-# RoR
+# Ruby on Rails. My first project.
