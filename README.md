@@ -1,2 +1,3 @@
-# Ruby on Rails. First project.
-# My habrababr project! 
+# Ruby on Rails!
+
+# First project - My habrababr! 

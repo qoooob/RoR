@@ -311,6 +311,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/home/qoob/ROR/README.md",
+			"settings":
+			{
+				"buffer_size": 50,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -362,16 +370,12 @@
 	"expanded_folders":
 	[
 		"/home/qoob/ROR/my_habrababr",
-		"/home/qoob/ROR/my_habrababr/app/controllers",
-		"/home/qoob/ROR/my_habrababr/lib/assets",
-		"/home/qoob/ROR/my_habrababr/lib/tasks",
-		"/home/qoob/ROR/my_habrababr/tmp/cache",
-		"/home/qoob/ROR/my_habrababr/tmp/cache/assets",
 		"/home/qoob/ROR/my_habrababr/vendor",
 		"/home/qoob/ROR/my_habrababr/vendor/assets"
 	],
 	"file_history":
 	[
+		"/home/qoob/ROR/my_habrababr/README.md",
 		"/home/qoob/ruby/homework/11_exercise/testpage1.html",
 		"/home/qoob/ruby/homework/11_exercise/testpage2.html",
 		"/home/qoob/ruby/homework/11_exercise/testpage3.html",
@@ -490,8 +494,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/home/qoob/ROR/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 50,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								50,
+								50
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
