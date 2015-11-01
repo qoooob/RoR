@@ -5,16 +5,25 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
-  def new
-    @category = Category.new
-  end
-
   def show
     set_category
   end
 
+  def new
+    @category = Category.new
+  end
+
   def edit
     set_category
+  end
+  
+  def create
+    @category = Category.new(category_params)
+    if @category.save
+      redirect_to @category
+    else
+      render :new
+    end
   end
 
   def update
@@ -32,15 +41,6 @@ class CategoriesController < ApplicationController
     @category.destroy
 
     redirect_to categories_path
-  end
-
-  def create
-    @category = Category.new(category_params)
-    if @category.save
-      redirect_to @category
-    else
-      render :new
-    end
   end
 
   private
