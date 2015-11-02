@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
   end
 
   def show
-    set_comment
   end
 
   def new
@@ -14,7 +13,6 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    set_comment
   end
 
   def create
@@ -27,7 +25,6 @@ class CommentsController < ApplicationController
     end
 
   def update
-    set_comment
       if @comment.update(comment_params)
         redirect_to @comment
       else
@@ -36,9 +33,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    set_comment
     @comment.destroy
-
     redirect_to comments_path
   end
 

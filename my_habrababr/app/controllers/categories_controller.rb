@@ -6,7 +6,6 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    set_category
   end
 
   def new
@@ -14,9 +13,8 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    set_category
   end
-  
+
   def create
     @category = Category.new(category_params)
     if @category.save
@@ -27,8 +25,6 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    set_category
-
     if @category.update(category_params)
       redirect_to @category
     else
@@ -37,9 +33,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    set_category
     @category.destroy
-
     redirect_to categories_path
   end
 

@@ -25,7 +25,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    set_post
       if @post.update(post_params)
         redirect_to @post
       else
@@ -34,9 +33,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    set_post
     @post.destroy
-
     redirect_to posts_path
   end
 
