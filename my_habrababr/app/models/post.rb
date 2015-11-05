@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   has_many :categories, through: :categories_posts
   has_many :tags_posts
   has_many :tags, through: :tags_posts
-  has_one :user
+  belongs_to :user
 
   validates :title, :body, presence: true
 end
