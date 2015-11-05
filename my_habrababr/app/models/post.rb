@@ -1,4 +1,10 @@
 class Post < ActiveRecord::Base
-  validates :title, presence: true
-  validates :body, presence: true
+  has_many :comments
+  has_many :categories_posts
+  has_many :categories, through: :categories_posts
+  has_many :tags_posts
+  has_many :tags, through: :tags_posts
+  has_one :user
+
+  validates :title, :body, presence: true
 end
