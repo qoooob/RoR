@@ -1,24 +1,19 @@
 <%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= render 'common/errors', object: @post %>
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :body %><br>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, class: 'form-control' %>
   </div>
+    <div class="field">
+      <%= f.label :category_ids, 'Категории' %><br>
+      <%= f.collection_select :category_ids, Category.all, :id, :name, {}, {multiple: true, class: 'checkbox'} %>
+    </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

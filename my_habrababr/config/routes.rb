@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :posts
+  resources :posts do
+    resources :comments, shallow: true
+  end
+
   resources :categories
 
-  root 'welcome#index'
+  root 'posts#index'
 end

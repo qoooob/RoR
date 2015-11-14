@@ -16,9 +16,11 @@ class CommentsController < ApplicationController
   end
 
   def create
+    @post = Post.find(params[:post_id])
     @comment = Comment.new(comment_params)
+    @comment.post = @post
       if @comment.save
-        redirect_to @comment
+        redirect_to @post, notice: 'Комментарий успешно создан'
       else
         render :new
       end
@@ -26,7 +28,7 @@ class CommentsController < ApplicationController
 
   def update
       if @comment.update(comment_params)
-        redirect_to @comment
+        redirect_to @post, notice: 'Комментарий успешно обновлён'
       else
         render :edit
       end
@@ -34,7 +36,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to comments_path
+    redirect_to @comment.post, notice: 'Комментарий успешно удалён'
   end
 
 
@@ -44,6 +46,6 @@ class CommentsController < ApplicationController
     end
 
     def comment_params
-      params.require(:comment).permit(:body)
+      params.require(:comment).permit(:body, :post_id)
     end
 end
