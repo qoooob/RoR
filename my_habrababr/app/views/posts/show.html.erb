@@ -5,6 +5,13 @@
   <%= render @post.categories %>
 </h5>
 
+<% if @post.user.present? %>
+    <h5>
+    <strong>Автор:</strong>
+    <%= @post.user.email %>
+    </h5>
+<% end %>
+
 <p>
   <%= @post.body %>
 </p>
@@ -15,8 +22,10 @@
     <strong><%= 'Комментарии ('+@post.comments.count.to_s+')'%></strong>
     <% @post.comments.each do |comment| %>
         <p><%= comment.body %></p>
+        <% if user_signed_in?  %>
         <p><%= link_to "Удалить", comment, method: :delete %></p>
         <p><%= link_to "Изменить", edit_comment_path %></p>
+        <% end %>
     <% end %>
     <strong>Новый комментарий:</strong>
 <% else %>
@@ -26,6 +35,8 @@
 
 <%= render 'comments/form' %>
 
-
+<% if user_signed_in?  %>
 <%= link_to 'Изменить', edit_post_path(@post) %> |
+<% end %>
+
 <%= link_to 'Назад', posts_path %>

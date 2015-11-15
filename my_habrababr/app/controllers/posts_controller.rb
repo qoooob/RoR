@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :user_check, only: [:edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :user_check]
 
   def index
     @posts = Post.all
@@ -17,7 +19,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
       if @post.save
         redirect_to @post, notice: 'Пост успешно создан'
       else
@@ -46,4 +48,11 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :body, category_ids: [])
     end
+
+  def user_check
+    @post = Post.find(params[:id])
+    unless @post.user = current_user
+      redirect_to posts_url, notice: 'У вас нет прав на выполнение этого действия'
+    end
+  end
 end
