@@ -21,10 +21,16 @@
 <% unless @post.comments.empty? %>
     <strong><%= 'Комментарии ('+@post.comments.count.to_s+')'%></strong>
     <% @post.comments.each do |comment| %>
-        <p><%= comment.body %></p>
-        <% if user_signed_in?  %>
-        <p><%= link_to "Удалить", comment, method: :delete %></p>
-        <p><%= link_to "Изменить", edit_comment_path %></p>
+            <p><%= comment.body %></p>
+        <% if comment.user.present? %>
+            <p>
+              <strong>Автор:</strong>
+              <%= comment.user.email %>
+            </p>
+        <% end %>
+        <% if comment.user == current_user %>
+            <p><%= link_to "Удалить", comment, method: :delete, data: {confirm: 'Точно удаляем?'} %></p>
+            <p><%= link_to "Изменить", edit_comment_path(comment) %></p>
         <% end %>
     <% end %>
     <strong>Новый комментарий:</strong>
@@ -35,8 +41,10 @@
 
 <%= render 'comments/form' %>
 
-<% if user_signed_in?  %>
-<%= link_to 'Изменить', edit_post_path(@post) %> |
+<% if @post.user == current_user %>
+    <%= link_to 'Изменить', edit_post_path(@post) %> |
+    <%= link_to 'Удалить', @post, method: :delete %> |
 <% end %>
+
 
 <%= link_to 'Назад', posts_path %>

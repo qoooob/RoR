@@ -19,8 +19,8 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @comment = current_user.comments.new(comment_params)
-    @comment.post = @post
+    @comment = @post.comments.new(comment_params)
+    @comment.user = current_user
 
       if @comment.save
         redirect_to @post, notice: 'Комментарий успешно создан'
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
 
   def update
       if @comment.update(comment_params)
-        redirect_to @post, notice: 'Комментарий успешно обновлён'
+        redirect_to @comment.post, notice: 'Комментарий успешно обновлён'
       else
         render :edit
       end
