@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :user_check]
   before_action :user_check, only: [:edit, :update, :destroy]
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   def index
     @comments = Comment.all
@@ -53,9 +53,8 @@ class CommentsController < ApplicationController
     end
 
   def user_check
-    @comment = Comment.find(params[:id])
-    unless @comment.user == current_user
-      redirect_to posts_path, notice: 'У вас нет прав на выполнение этого действия'
+    unless current_user.author_of?(@comment) || current_user.admin?
+      redirect_to posts_path, alert: 'У вас нет прав на выполнение этого действия'
     end
   end
 end

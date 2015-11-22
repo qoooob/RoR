@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :user_check]
 
   def index
     @posts = Post.all
@@ -9,7 +9,7 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments =@post.comments
+    @comments = @post.comments
   end
 
   def new
@@ -51,9 +51,8 @@ class PostsController < ApplicationController
     end
 
   def user_check
-    @post = Post.find(params[:id])
-    unless @post.user = current_user
-      redirect_to posts_url, notice: 'У вас нет прав на выполнение этого действия'
+    unless current_user.author_of?(@post) || current_user.admin?
+      redirect_to posts_path, alert: 'У вас нет прав на выполнение этого действия'
     end
   end
 end

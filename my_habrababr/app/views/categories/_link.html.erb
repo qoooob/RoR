@@ -2,4 +2,7 @@
     <%= link_to category.name, category %><br>
 <% end %>
 <hr>
-<%= link_to 'Все категории', categories_path %>
+
+<% if current_user && current_user.admin? %>
+<%= link_to 'Все категории', admin_categories_path %>
+<% end %>
