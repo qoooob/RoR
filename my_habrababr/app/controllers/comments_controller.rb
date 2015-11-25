@@ -1,11 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_comment, only: [:show, :edit, :update, :destroy, :user_check]
+  before_action :authenticate_user!, except: [ :show]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
-
-  def index
-    @comments = Comment.all
-  end
 
   def show
   end

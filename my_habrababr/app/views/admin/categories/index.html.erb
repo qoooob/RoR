@@ -1,5 +1,5 @@
 
-<h1>Категории</h1>
+<h1><%= t('.title') %></h1>
 
 <table>
   <thead>
@@ -13,9 +13,9 @@
   <% @categories.each do |category| %>
       <tr>
         <td><%= category.name %></td>
-        <td><%= link_to 'Показать',  category %></td>
-        <td><%= link_to 'Изменить', edit_admin_category_path(category) %></td>
-        <td><%= link_to 'Удалить', [:admin, category], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+        <td><%= link_to t('common.show'),  category %></td>
+        <td><%= link_to t('common.edit'), edit_admin_category_path(category) %></td>
+        <td><%= link_to t('common.back'), [:admin, category], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
       </tr>
   <% end %>
   </tbody>
@@ -23,4 +23,4 @@
 
 <br>
 
-<%= link_to 'Новая категория', new_admin_category_path %>
+<%= link_to t('.newcategory'), new_admin_category_path %>

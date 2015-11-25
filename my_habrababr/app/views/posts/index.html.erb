@@ -1,12 +1,18 @@
-<%= link_to 'НОВЫЙ ПОСТ', new_post_path, class: 'btn btn-large' %>
 
-<h1>
+<h1><%= t('.title') %></h1>
+
+<tr>
+    <td><%= link_to t('.newpost'), new_post_path, class: 'btn btn-large' %></td>
+        <% if user_signed_in? %>
+        <td><%= link_to t('.draft'), unpublished_posts_path, class: 'btn btn-large' %></td>
+        <% end %>
+</tr>
   <% if @category %>
-      <%= 'Список публикаций категории '+@category.name %>
+      <h1><%= 'Список публикаций категории '+@category.name %></h1>
   <% else %>
-      Список публикаций
+      <h1><%= @title %></h1>
   <% end %>
-</h1>
+
 
   <%= render @posts %>
 

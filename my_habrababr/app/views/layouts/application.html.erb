@@ -47,7 +47,7 @@
         </button>
         <%= link_to 'MyHabrababr', root_path, class: 'navbar-brand' %>
         <div class="col-lg-9 navbar-collapse collapse navbar-responsive-collapse">
-            <% if current_user && current_user.admin? %>
+            <% if user_admin? %>
             <ul class="nav navbar-nav">
                 <li><%= link_to 'Админка', admin_categories_path  %></li>
             </ul>

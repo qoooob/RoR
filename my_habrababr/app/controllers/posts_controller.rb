@@ -1,10 +1,27 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :publish, :hide]
   before_action :user_check, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    @posts = Post.reverse_order(:desc).published.all
+    @title = 'Список Публикаций'
+  end
+
+  def unpublished
+    @posts = Post.reverse_order(:desc).unpublished.all
+    @posts = @posts.find_by_user_id(current_user) unless user_admin?
+    @title = 'Доступные черновики'
+  end
+
+  def publish
+    @post.update(published: true)
+    redirect_to posts_path
+  end
+
+  def hide
+    @post.update(published: false)
+    redirect_to unpublished_posts_path
   end
 
   def show
@@ -47,7 +64,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :body, category_ids: [])
+      params.require(:post).permit(:title, :body, :published, category_ids: [])
     end
 
   def user_check
